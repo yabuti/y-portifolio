@@ -206,11 +206,11 @@ a{color:inherit;text-decoration:none}
 .footer-copy{margin-top:1.3rem;font-size:.72rem;color:#444}
 
 /* ANIMATIONS */
-.fade-up{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.fade-up{opacity:0;transform:translateY(18px);transition:opacity .35s ease,transform .35s ease}
 .fade-up.in{opacity:1;transform:translateY(0)}
-.fade-left{opacity:0;transform:translateX(36px);transition:opacity .7s ease,transform .7s ease}
+.fade-left{opacity:0;transform:translateX(20px);transition:opacity .35s ease,transform .35s ease}
 .fade-left.in{opacity:1;transform:translateX(0)}
-.tag-pop{opacity:0;transform:scale(.7);transition:opacity .4s ease,transform .4s cubic-bezier(.34,1.56,.64,1)}
+.tag-pop{opacity:0;transform:scale(.85);transition:opacity .25s ease,transform .25s cubic-bezier(.34,1.56,.64,1)}
 .tag-pop.in{opacity:1;transform:scale(1)}
 
 /* RESPONSIVE */
@@ -275,7 +275,7 @@ const CONTACT = [
 ];
 
 /* ── hooks ── */
-function useInView(ref, threshold=0.15) {
+function useInView(ref, threshold=0.05) {
   const [v,setV] = useState(false);
   useEffect(()=>{
     const obs = new IntersectionObserver(([e])=>{ if(e.isIntersecting){setV(true);obs.disconnect();} },{threshold});
@@ -485,20 +485,19 @@ function Hero() {
 /* ── About ── */
 function About() {
   const ref=useRef(null); const v=useInView(ref);
-  const d=(n)=>({transitionDelay:`${n}s`});
   return (
     <section id="about" className="section section-dark2">
       <div className="container">
         <p className={`section-tag fade-up${v?' in':''}`}>About Me</p>
-        <h2 className={`section-title title-dark fade-up${v?' in':''}`} style={d(.1)}>Passionate About Building<br/>Meaningful Connections</h2>
-        <div className={`gold-div fade-up${v?' in':''}`} style={d(.2)}/>
+        <h2 className={`section-title title-dark fade-up${v?' in':''}`} style={{transitionDelay:'.05s'}}>Passionate About Building<br/>Meaningful Connections</h2>
+        <div className={`gold-div fade-up${v?' in':''}`} style={{transitionDelay:'.08s'}}/>
         <div ref={ref} className="about-grid">
-          <div className={`about-photo-col fade-up${v?' in':''}`} style={d(.2)}>
+          <div className={`about-photo-col fade-up${v?' in':''}`} style={{transitionDelay:'.05s'}}>
             <img className="about-photo" src="photo_2026-01-27_05-37-49.jpg" alt="Yeabsira Terefe"/>
             <p className="about-photo-name">Yeabsira Terefe</p>
             <p className="about-photo-role">Social Media Marketer</p>
           </div>
-          <div className={`about-text fade-up${v?' in':''}`} style={d(.3)}>
+          <div className={`about-text fade-up${v?' in':''}`} style={{transitionDelay:'.1s'}}>
             <p>I am certified in Social Media Marketing from <strong style={{color:"var(--gold)"}}>Khilx Academy</strong> with a passion for creating engaging content and building meaningful online communities.</p>
             <p>As I developed my marketing knowledge, understanding the core of digital marketing came naturally. I continuously upgrade my skills to stay ahead in this fast-changing industry.</p>
             <p>I help brands connect with their audience and drive real growth through tailored social media strategies that are both creative and data-informed.</p>
@@ -511,7 +510,7 @@ function About() {
               {icon:"📈",title:"Growth Focused",desc:"Every action is tied to measurable outcomes — followers, reach, and conversions."},
               {icon:"🤝",title:"Community Builder",desc:"Turning passive followers into active, loyal brand advocates."},
             ].map((b,i)=>(
-              <div className={`about-badge fade-left${v?' in':''}`} key={b.title} style={d(.3+i*.12)}>
+              <div className={`about-badge fade-left${v?' in':''}`} key={b.title} style={{transitionDelay:`${0.05+i*.06}s`}}>
                 <span className="badge-icon">{b.icon}</span>
                 <div><h4>{b.title}</h4><p>{b.desc}</p></div>
               </div>
@@ -522,18 +521,16 @@ function About() {
     </section>
   );
 }
-
 /* ── Education ── */
 function Education() {
   const ref=useRef(null); const v=useInView(ref);
-  const d=(n)=>({transitionDelay:`${n}s`});
   return (
     <section id="education" className="section section-dark">
       <div className="container">
         <p className={`section-tag fade-up${v?' in':''}`}>Education</p>
-        <h2 className={`section-title title-dark fade-up${v?' in':''}`} style={d(.1)}>Educational Background</h2>
-        <div className={`gold-div fade-up${v?' in':''}`} style={d(.2)}/>
-        <div ref={ref} className={`fade-up${v?' in':''}`} style={d(.3)}>
+        <h2 className={`section-title title-dark fade-up${v?' in':''}`} style={{transitionDelay:'.05s'}}>Educational Background</h2>
+        <div className={`gold-div fade-up${v?' in':''}`} style={{transitionDelay:'.08s'}}/>
+        <div ref={ref} className={`fade-up${v?' in':''}`} style={{transitionDelay:'.1s'}}>
           <div className="edu-card">
             <span className="edu-year">2025</span>
             <h3>Social Media Marketing Certification</h3>
@@ -542,7 +539,7 @@ function Education() {
             <p>The program also covered how to continuously update marketing knowledge and skills in this fast-changing industry — ensuring long-term professional relevance.</p>
             <div className="edu-tags">
               {["Sales","Marketing","Negotiation","Communication","Content Strategy","Analytics","Brand Building","Audience Research"].map((s,i)=>(
-                <span className={`edu-tag tag-pop${v?' in':''}`} key={s} style={d(.4+i*.07)}>{s}</span>
+                <span className={`edu-tag tag-pop${v?' in':''}`} key={s} style={{transitionDelay:`${0.05+i*.04}s`}}>{s}</span>
               ))}
             </div>
           </div>
@@ -554,25 +551,24 @@ function Education() {
 
 /* ── Skills ── */
 function Skills() {
-  const ref=useRef(null); const v=useInView(ref,.1);
-  const d=(n)=>({transitionDelay:`${n}s`});
+  const ref=useRef(null); const v=useInView(ref,.05);
   return (
     <section id="skills" className="section section-cream">
       <div className="container">
         <p className={`section-tag fade-up${v?' in':''}`} style={{color:"var(--gold-d)"}}>Skills</p>
-        <h2 className={`section-title title-light fade-up${v?' in':''}`} style={d(.1)}>Personal Skills Assessment</h2>
-        <div className={`gold-div fade-up${v?' in':''}`} style={d(.2)}/>
-        <p className={`section-sub sub-light fade-up${v?' in':''}`} style={{...d(.25),marginBottom:"2.5rem"}}>Skills measured based on hands-on exposure, coursework, and real-world application.</p>
+        <h2 className={`section-title title-light fade-up${v?' in':''}`} style={{transitionDelay:'.05s'}}>Personal Skills Assessment</h2>
+        <div className={`gold-div fade-up${v?' in':''}`} style={{transitionDelay:'.08s'}}/>
+        <p className={`section-sub sub-light fade-up${v?' in':''}`} style={{transitionDelay:'.1s',marginBottom:"2.5rem"}}>Skills measured based on hands-on exposure, coursework, and real-world application.</p>
         <div ref={ref} className="skills-grid">
-          <div className={`fade-up${v?' in':''}`} style={d(.3)}>
+          <div className={`fade-up${v?' in':''}`} style={{transitionDelay:'.1s'}}>
             <p className="skills-group-title">🛠️ Hard Skills</p>
             <div className="circles-grid">
-              {HARD.map((s,i)=><CircleSkill key={s.name} {...s} animate={v} delay={i*150}/>)}
+              {HARD.map((s,i)=><CircleSkill key={s.name} {...s} animate={v} delay={i*80}/>)}
             </div>
           </div>
-          <div className={`fade-up${v?' in':''}`} style={d(.4)}>
+          <div className={`fade-up${v?' in':''}`} style={{transitionDelay:'.15s'}}>
             <p className="skills-group-title">💡 Soft Skills</p>
-            {SOFT.map((s,i)=><BarSkill key={s.name} {...s} animate={v} delay={i*120}/>)}
+            {SOFT.map((s,i)=><BarSkill key={s.name} {...s} animate={v} delay={i*70}/>)}
           </div>
         </div>
       </div>
@@ -583,17 +579,16 @@ function Skills() {
 /* ── Services ── */
 function Services() {
   const ref=useRef(null); const v=useInView(ref);
-  const d=(n)=>({transitionDelay:`${n}s`});
   return (
     <section id="services" className="section section-dark2">
       <div className="container">
         <p className={`section-tag fade-up${v?' in':''}`}>What I Offer</p>
-        <h2 className={`section-title title-dark fade-up${v?' in':''}`} style={d(.1)}>Services I Provide</h2>
-        <div className={`gold-div fade-up${v?' in':''}`} style={d(.2)}/>
-        <p className={`section-sub sub-dark fade-up${v?' in':''}`} style={d(.25)}>From strategy to execution — everything you need to grow your brand online.</p>
+        <h2 className={`section-title title-dark fade-up${v?' in':''}`} style={{transitionDelay:'.05s'}}>Services I Provide</h2>
+        <div className={`gold-div fade-up${v?' in':''}`} style={{transitionDelay:'.08s'}}/>
+        <p className={`section-sub sub-dark fade-up${v?' in':''}`} style={{transitionDelay:'.1s'}}>From strategy to execution — everything you need to grow your brand online.</p>
         <div ref={ref} className="services-grid">
           {SERVICES.map((s,i)=>(
-            <div className={`svc-card fade-up${v?' in':''}`} key={s.title} style={d(.1+i*.1)}>
+            <div className={`svc-card fade-up${v?' in':''}`} key={s.title} style={{transitionDelay:`${i*.06}s`}}>
               <span className="svc-icon">{s.icon}</span>
               <h3>{s.title}</h3><p>{s.desc}</p>
             </div>
@@ -607,24 +602,23 @@ function Services() {
 /* ── Contact ── */
 function Contact() {
   const ref=useRef(null); const v=useInView(ref);
-  const d=(n)=>({transitionDelay:`${n}s`});
   return (
     <section id="contact" className="section section-cream2">
       <div className="container">
         <p className={`section-tag fade-up${v?' in':''}`} style={{color:"var(--gold-d)"}}>Contact</p>
-        <h2 className={`section-title title-light fade-up${v?' in':''}`} style={d(.1)}>Let's Work Together</h2>
-        <div className={`gold-div fade-up${v?' in':''}`} style={d(.2)}/>
-        <p className={`section-sub sub-light fade-up${v?' in':''}`} style={d(.25)}>Ready to grow your brand? Reach out and let's build something great together.</p>
+        <h2 className={`section-title title-light fade-up${v?' in':''}`} style={{transitionDelay:'.05s'}}>Let's Work Together</h2>
+        <div className={`gold-div fade-up${v?' in':''}`} style={{transitionDelay:'.08s'}}/>
+        <p className={`section-sub sub-light fade-up${v?' in':''}`} style={{transitionDelay:'.1s'}}>Ready to grow your brand? Reach out and let's build something great together.</p>
         <div ref={ref} className="contact-grid">
           <div className="contact-list">
             {CONTACT.map((c,i)=>(
-              <div className={`contact-item fade-left${v?' in':''}`} key={c.label} style={d(.2+i*.1)}>
+              <div className={`contact-item fade-left${v?' in':''}`} key={c.label} style={{transitionDelay:`${i*.06}s`}}>
                 <div className="contact-icon">{c.icon}</div>
                 <div className="contact-body"><strong>{c.label}</strong><span>{c.value}</span></div>
               </div>
             ))}
           </div>
-          <div className={`contact-cta fade-left${v?' in':''}`} style={d(.5)}>
+          <div className={`contact-cta fade-left${v?' in':''}`} style={{transitionDelay:'.15s'}}>
             <h3>Ready to Elevate Your Brand?</h3>
             <p>Whether you need a full social media strategy, ad campaigns, or just a consultation — I'm here to help your business grow online.</p>
             <div className="cta-links">
@@ -638,7 +632,6 @@ function Contact() {
     </section>
   );
 }
-
 /* ── Footer ── */
 function Footer() {
   return (
