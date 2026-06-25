@@ -24,6 +24,8 @@ const SERVICES = [
   { icon: "📣", title: "Facebook & Instagram Ads",      desc: "Targeted paid ad campaigns on Meta platforms that maximize reach and return on ad spend." },
   { icon: "💡", title: "Marketing Consultation",        desc: "Expert guidance to help you navigate the ever-changing digital marketing landscape with confidence." },
   { icon: "🤝", title: "Community Building",            desc: "Building and nurturing engaged online communities that turn followers into loyal brand advocates." },
+  { icon: "✍️", title: "Script Writer",                 desc: "Professional script writing for social media content, ads, and brand storytelling that captivates audiences." },
+  { icon: "🎤", title: "Host",                          desc: "On-camera and event hosting services with engaging presentation skills to elevate your brand's presence." },
 ];
 
 const CONTACT = [
@@ -212,12 +214,12 @@ function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState('home');
-  const links = ["About", "Education", "Skills", "Services", "Contact"];
+  const links = ["About", "Education", "Skills", "Services", "Brands", "Contact"];
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
-      const sections = ['home', 'about', 'education', 'skills', 'services', 'contact'];
+      const sections = ['home', 'about', 'education', 'skills', 'services', 'brands', 'contact'];
       for (let i = sections.length - 1; i >= 0; i--) {
         const el = document.getElementById(sections[i]);
         if (el && window.scrollY >= el.offsetTop - 120) { setActive(sections[i]); break; }
@@ -501,6 +503,37 @@ function Services() {
   );
 }
 
+// ── BRANDS ────────────────────────────────────────────────────────────────────
+function Brands() {
+  const ref = useRef(null);
+  const visible = useInView(ref);
+  const brands = [
+    { name:"Blue Ocean Creatives", handle:"@blue_ocean_creatives", url:"https://www.tiktok.com/@blue_ocean_creatives", icon:"🌊" },
+    { name:"Lavish Med Spa Dire Dawa", handle:"@lavish_medspa_diredawa", url:"https://www.tiktok.com/@lavish_medspa_diredawa", icon:"💎" },
+    { name:"Blue Ocean Creatives ET", handle:"@blue_ocean_creatives_et", url:"https://www.tiktok.com/@blue_ocean_creatives_et", icon:"🌊" },
+  ];
+  return (
+    <section id="brands" className="section section-dark">
+      <div className="container">
+        <p className={`section-tag fade-up${visible ? ' in' : ''}`}>Brands I Work With</p>
+        <h2 className={`section-title section-title-dark fade-up${visible ? ' in' : ''}`} style={{ transitionDelay: '0.1s' }}>Trusted by Great Brands</h2>
+        <div className={`gold-divider fade-up${visible ? ' in' : ''}`} style={{ transitionDelay: '0.2s' }} />
+        <p className={`section-subtitle section-subtitle-dark fade-up${visible ? ' in' : ''}`} style={{ transitionDelay: '0.25s' }}>Managing social media and content for these amazing brands on TikTok.</p>
+        <div ref={ref} style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:'1.5rem',marginTop:'2.5rem'}}>
+          {brands.map((b,i)=>(
+            <a key={b.name} href={b.url} target="_blank" rel="noopener" className={`service-card fade-up${visible ? ' in' : ''}`} style={{textDecoration:'none',transitionDelay:`${0.1 + i * 0.08}s`}}>
+              <span className="service-icon icon-float" style={{fontSize:'2.5rem'}}>{b.icon}</span>
+              <h3 style={{fontSize:'1rem',fontWeight:700,color:'var(--text-light)',marginBottom:'.4rem'}}>{b.name}</h3>
+              <p style={{fontSize:'.85rem',color:'var(--gold)',fontWeight:600}}>{b.handle}</p>
+              <p style={{fontSize:'.8rem',color:'var(--text-muted)',marginTop:'.4rem'}}>TikTok Management</p>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ── CONTACT ───────────────────────────────────────────────────────────────────
 function Contact() {
   const ref = useRef(null);
@@ -569,7 +602,7 @@ function Footer() {
       <p className="footer-name">Yeabsira Terefe</p>
       <p className="footer-sub">Social Media Marketer · Addis Ababa, Ethiopia</p>
       <div className="footer-links">
-        {["About","Education","Skills","Services","Contact"].map(l => (
+        {["About","Education","Skills","Services","Brands","Contact"].map(l => (
           <a key={l} href={`#${l.toLowerCase()}`}>{l}</a>
         ))}
       </div>
@@ -588,6 +621,7 @@ function App() {
       <Education />
       <Skills />
       <Services />
+      <Brands />
       <Contact />
       <Footer />
     </>
